@@ -1,8 +1,8 @@
-import type { Note } from '@/types/note';
-import css from '@/components/NoteList/NoteList.module.css';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteNote } from '@/lib/api';
-import { useRouter } from 'next/navigation';
+import type { Note } from "@/types/note";
+import css from "@/components/NoteList/NoteList.module.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteNote } from "@/lib/api/api";
+import { useRouter } from "next/navigation";
 
 interface NoteListProps {
   notes: Note[];
@@ -16,7 +16,7 @@ export default function NoteList({ notes }: NoteListProps) {
   const { mutate } = useMutation({
     mutationFn: deleteNote,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notes'] });
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
     },
   });
 
@@ -29,14 +29,14 @@ export default function NoteList({ notes }: NoteListProps) {
           onClick={() => {
             router.push(`/notes/${id}`, { scroll: false });
           }}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
         >
           <h2 className={css.title}>{title}</h2>
           <p className={css.content}>{content}</p>
           <div className={css.footer}>
             <span className={css.tag}>{tag}</span>
             <button
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 mutate(id);
               }}
