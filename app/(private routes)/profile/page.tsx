@@ -27,7 +27,7 @@ export default function ProfilePage() {
         </div>
         <div className={css.avatarWrapper}>
           <Image
-            src="Avatar"
+            src="https://ac.goit.global/default-avatar.png"
             alt="User Avatar"
             width={120}
             height={120}
