@@ -1,0 +1,30 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import css from "@/app/NotFound.module.css";
+
+export default function NotFoundContent() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => router.push("/notes/filter/all"), 10000);
+    return () => clearTimeout(timer);
+  }, [router]);
+
+  return (
+    <div className={css.container}>
+      <h1 className={css.title}>404 - Page Not Found</h1>
+      <p className={css.description}>
+        Sorry, the page you are looking for does not exist on NoteHub.
+      </p>
+      <p className={css.description}>
+        You will be redirected to the home page in 10 seconds.
+      </p>
+      <Link href="/notes/filter/all" className={css.link}>
+        Go back home
+      </Link>
+    </div>
+  );
+}

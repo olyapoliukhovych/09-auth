@@ -1,0 +1,42 @@
+body {
+  font-family: var(--font-roboto), sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f8f9fa;
+}
+
+html {
+  scrollbar-color: rgb(85, 12, 114) transparent;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+a,
+button,
+textarea,
+select {
+  outline-color: #550c72;
+}
+
+.loadingMessage {
+  padding: 20px;
+  text-align: center;
+  color: #2a003a;
+}
+
+.errorMessage {
+  padding: 20px;
+  text-align: center;
+  color: #dc3545;
+}

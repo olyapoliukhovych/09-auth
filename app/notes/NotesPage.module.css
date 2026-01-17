@@ -1,0 +1,45 @@
+.app {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0px auto;
+  padding: 0 16px 16px;
+  flex: 1;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.createLink {
+  padding: 6px 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #550c72;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+
+.createLink:hover,
+.createLink:focus,
+.createLink:active {
+  background-color: #2a003a;
+}
+
+.noNotesMsg {
+  padding: 20px;
+  text-align: center;
+  color: #2a003a;
+}
+
+.loading {
+  padding: 20px;
+  text-align: center;
+  color: #2a003a;
+}
