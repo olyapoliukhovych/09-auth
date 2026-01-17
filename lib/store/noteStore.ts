@@ -1,4 +1,4 @@
-import { NewNoteData } from "@/types/note";
+import { NewNoteData } from "@/types/user";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -26,6 +26,6 @@ export const useNoteDraftStore = create<NoteDraftStore>()(
       partialize: (state) => ({
         draft: state.draft,
       }),
-    }
-  )
+    },
+  ),
 );

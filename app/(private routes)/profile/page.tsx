@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import css from "./Profile.module.css";
+import css from "./ProfilePage.module.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,18 +10,18 @@ export const metadata: Metadata = {
 };
 
 export default function ProfilePage() {
-  const user = {
-    username: "your_username",
-    email: "your_email@example.com",
-    avatar: "https://ac.goit.global/default-avatar.png",
-  };
+  //   const user = {
+  //     username: "your_username",
+  //     email: "your_email@example.com",
+  //     avatar: "https://ac.goit.global/default-avatar.png",
+  //   };
 
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
         <div className={css.header}>
           <h1 className={css.formTitle}>Profile Page</h1>
-          <Link href={} className={css.editProfileButton}>
+          <Link href="/profile/edit" className={css.editProfileButton}>
             Edit Profile
           </Link>
         </div>

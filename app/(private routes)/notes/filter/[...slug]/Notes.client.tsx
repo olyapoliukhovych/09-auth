@@ -1,29 +1,19 @@
 "use client";
 
 import { useState } from "react";
-// import { useParams } from "next/navigation";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useDebounce } from "use-debounce";
-import { fetchNotes } from "@/lib/api/api";
+import { fetchNotes } from "@/lib/api/clientApi";
 import NoteList from "@/components/NoteList/NoteList";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
-import css from "@/app/notes/NotesPage.module.css";
-// import Modal from "@/components/Modal/Modal";
-// import NoteForm from "@/components/NoteForm/NoteForm";
+import css from "../../NotesPage.module.css";
 import Link from "next/link";
 
 export default function NotesClient({ serverTag }: { serverTag?: string }) {
-  // const params = useParams();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
-  // const [isCreateOpen, setIsCreateOpen] = useState(false);
-
-  // const slug = params.slug;
-  // const activeTag =
-  //   serverTag ??
-  // Array.isArray(slug) ? slug[0] : slug === "all" ? undefined : slug;
 
   const { data, isLoading } = useQuery({
     queryKey: ["notes", page, debouncedSearch, serverTag],
@@ -61,12 +51,6 @@ export default function NotesClient({ serverTag }: { serverTag?: string }) {
       ) : (
         <p className={css.noNotesMsg}>No notes found.</p>
       )}
-
-      {/* {isCreateOpen && (
-        <Modal onClose={() => setIsCreateOpen(false)} showBackButton={false}>
-          <NoteForm onClose={() => setIsCreateOpen(false)} />
-        </Modal>
-      )} */}
     </div>
   );
 }

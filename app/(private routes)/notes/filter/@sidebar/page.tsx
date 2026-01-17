@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import css from '@/app/notes/filter/@sidebar/SidebarNotes.module.css';
+import Link from "next/link";
+import css from "./SidebarNotes.module.css";
 
-const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
+const tags = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
 
 const SidebarNotes = () => {
   return (
@@ -11,7 +11,7 @@ const SidebarNotes = () => {
           All notes
         </Link>
       </li>
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <li key={tag} className={css.menuItem}>
           <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
             {tag}

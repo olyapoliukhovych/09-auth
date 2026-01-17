@@ -1,12 +1,30 @@
+import { User } from "@/types/user";
 import { nextServer } from "./api";
-import { Note } from "../../types/note";
+import { Tag } from "@/components/NoteForm/NoteForm";
 
-// notes
+export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
+
+export interface Note {
+  id: string;
+  title: string;
+  content: string;
+  tag: NoteTag;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type NewNoteData = {
+  title: string;
+  content: string;
+  tag: NoteTag;
+};
+
 export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
 }
 
+// notes
 export const fetchNotes = async (
   page: number = 1,
   search: string = "",
@@ -43,8 +61,29 @@ export const deleteNote = async (id: string): Promise<Note> => {
   return data;
 };
 
+export async function fetchTags(): Promise<Tag[]> {
+  return [
+    { id: "1", name: "Todo" },
+    { id: "2", name: "Work" },
+    { id: "3", name: "Personal" },
+    { id: "4", name: "Meeting" },
+    { id: "5", name: "Shopping" },
+  ];
+}
+
 // auth
 // register
+export type RegisterRequest = {
+  email: string;
+  password: string;
+  username: string;
+};
+
+export const register = async (data: RegisterRequest) => {
+  const res = await nextServer.post<User>("/auth/register", data);
+  return res.data;
+};
+
 // login
 // logout
 // checkSession

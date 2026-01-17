@@ -2,10 +2,10 @@
 
 import css from "@/components/NoteForm/NoteForm.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNote } from "@/lib/api/api";
+import { createNote } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
-import { NewNoteData } from "@/types/note";
+import { NewNoteData } from "@/lib/api/clientApi";
 
 export interface Tag {
   id: string;

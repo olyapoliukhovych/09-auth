@@ -1,6 +1,4 @@
 import axios from "axios";
-import type { NewNoteData, Note } from "@/types/note";
-import { Tag } from "@/components/NoteForm/NoteForm";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL + "/api";
 
@@ -8,6 +6,16 @@ export const nextServer = axios.create({
   baseURL,
   withCredentials: true,
 });
+
+export interface ApiError {
+  message: string;
+  response?: {
+    data?: {
+      error?: string;
+      message?: string;
+    };
+  };
+}
 
 // nextServer.interceptors.request.use((config) => {
 //   const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
