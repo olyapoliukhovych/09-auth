@@ -2,23 +2,7 @@ import { User } from "@/types/user";
 import { nextServer } from "./api";
 import { Tag } from "@/components/NoteForm/NoteForm";
 import toast from "react-hot-toast";
-
-export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
-
-export interface Note {
-  id: string;
-  title: string;
-  content: string;
-  tag: NoteTag;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export type NewNoteData = {
-  title: string;
-  content: string;
-  tag: NoteTag;
-};
+import { Note } from "@/types/note";
 
 export interface FetchNotesResponse {
   notes: Note[];
@@ -86,7 +70,6 @@ export const register = async (data: RegisterRequest) => {
 };
 
 // login
-
 export type LoginRequest = {
   email: string;
   password: string;
@@ -98,7 +81,6 @@ export const login = async (data: LoginRequest) => {
 };
 
 // checkSession
-
 type CheckSessionRequest = {
   success: boolean;
 };

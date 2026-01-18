@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
-import { NewNoteData } from "@/lib/api/clientApi";
+import { NewNoteData } from "@/types/note";
 
 export interface Tag {
   id: string;
