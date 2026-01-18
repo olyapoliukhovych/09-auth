@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
 import { Roboto } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import NextTopLoader from "nextjs-toploader";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -61,23 +62,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
+        <NextTopLoader
+          color="#fde3c9"
+          showSpinner={false}
+          // shadow="0 0 10px #fde3c9,0 0 5px #fde3c9"
+        />
         <Toaster
           position="top-right"
           toastOptions={{
-            duration: 5000,
+            duration: 3000,
             style: {
               color: "#333",
               borderRadius: "10px",
             },
             success: {
-              duration: 5000,
+              duration: 3000,
               iconTheme: {
-                primary: "#0a5431",
+                primary: "#056237",
                 secondary: "#fff",
               },
             },
             error: {
-              duration: 5000,
+              duration: 3000,
               iconTheme: {
                 primary: "#dc3545",
                 secondary: "#fff",

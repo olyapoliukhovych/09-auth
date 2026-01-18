@@ -34,7 +34,9 @@ const AuthProvider = ({ children }: Props) => {
         console.error("Auth check failed:", error);
         clearIsAuthenticated();
 
-        if (pathname.startsWith("/profile")) {
+        const isPublicPath = pathname === "/sign-in" || pathname === "/sign-up";
+
+        if (!isPublicPath) {
           router.push("/sign-in");
         }
       } finally {

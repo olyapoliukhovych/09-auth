@@ -129,25 +129,39 @@ export const updateMe = async (data: { username: string }) => {
 // push notifications
 nextServer.interceptors.response.use(
   (response) => {
+    const excludedUrls = ["/auth/login", "/auth/logout", "/auth/register"];
+
+    const isExcluded = excludedUrls.some((url) =>
+      response.config.url?.includes(url),
+    );
+
     if (
-      response.config.method === "patch" ||
-      response.config.method === "put"
+      ["patch", "put", "post"].includes(response.config.method || "") &&
+      !isExcluded
     ) {
       toast.success("Changes saved successfully!");
     }
     return response;
   },
   (error) => {
+    const requestUrl = error.config?.url || "";
     const status = error.response?.status;
-    const message = error.response?.data?.message || "Something went wrong";
+    const message =
+      error.response?.data?.message || error.message || "Something went wrong";
 
-    if (status === 401) return Promise.reject(error);
+    const isSilentEndpoint = requestUrl.includes("/users/me");
+    if (isSilentEndpoint) {
+      return Promise.reject(error);
+    }
 
-    if (status === 400) toast.error(`Validation Error: ${message}`);
-    else if (status === 403) toast.error("Access denied!");
-    else if (status === 404) toast.error("Resource not found");
-    else if (status === 500) toast.error("Server error, try again later");
-    else toast.error(message);
+    let finalMessage = message;
+
+    if (status === 400) finalMessage = `Validation Error: ${message}`;
+    else if (status === 403) finalMessage = "Access denied!";
+    else if (status === 404) finalMessage = "Resource not found";
+    else if (status === 500) finalMessage = "Server error, try again later";
+
+    toast.error(finalMessage);
 
     return Promise.reject(error);
   },
@@ -155,6 +169,8 @@ nextServer.interceptors.response.use(
 
 export const notify = {
   loginSuccess: () => toast.success("Logged in successfully"),
+
   logoutSuccess: () => toast.success("Logged out successfully"),
-  registerSuccess: () => toast.success("Account created! Please sign in."),
+
+  registerSuccess: () => toast.success("Account created!"),
 };
