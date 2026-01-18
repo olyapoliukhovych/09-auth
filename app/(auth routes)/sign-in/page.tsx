@@ -34,6 +34,7 @@ const SignIn = () => {
             type="email"
             name="email"
             className={css.input}
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             required
           />
         </div>
@@ -45,6 +46,7 @@ const SignIn = () => {
             type="password"
             name="password"
             className={css.input}
+            minLength={8}
             required
           />
         </div>
