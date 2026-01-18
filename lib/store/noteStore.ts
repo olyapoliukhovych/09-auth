@@ -1,4 +1,4 @@
-import { NewNoteData } from "@/lib/api/clientApi";
+import { NewNoteData } from "@/types/note";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
