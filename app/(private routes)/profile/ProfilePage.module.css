@@ -10,7 +10,7 @@
   max-width: 500px;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 24px;
   text-align: left;
@@ -20,6 +20,7 @@
   font-size: 32px;
   font-weight: 700;
   color: #1a1a1a;
+  margin-top: 0;
   margin-bottom: 24px;
   text-align: left;
 }
@@ -54,22 +55,22 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
+  align-items: flex-start;
 }
 
 .editProfileButton {
-  padding: 8px 16px;
+  padding: 6px 12px;
   font-size: 16px;
   font-weight: 600;
-  background-color: #0d6efd;
+  background-color: #550c72;
   color: white;
-  border-radius: 6px;
+  border-radius: 4px;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.editProfileButton:hover {
-  background-color: #0b5ed7;
+.editProfileButton:hover,
+.editProfileButton:focus,
+.editProfileButton:active {
+  background-color: #2a003a;
 }

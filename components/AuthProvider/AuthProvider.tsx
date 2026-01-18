@@ -71,6 +71,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { getMe } from "../../lib/api/clientApi";
 import { useAuthStore } from "../../lib/store/authStore";
 import { useEffect, useState } from "react";
+import { Spinner } from "../Spinner/Spinner";
 
 type Props = {
   children: React.ReactNode;
@@ -112,18 +113,7 @@ const AuthProvider = ({ children }: Props) => {
   }, [pathname, router, setUser, clearIsAuthenticated]);
 
   if (isLoading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <p>Loading session...</p>
-      </div>
-    );
+    return <Spinner fullScreen />;
   }
 
   return <>{children}</>;

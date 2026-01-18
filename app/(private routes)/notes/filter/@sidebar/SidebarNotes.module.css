@@ -13,9 +13,8 @@
   color: white;
   font-size: 16px;
   display: block;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 4px;
-  transition: background-color 250ms ease;
 }
 
 .menuLink:hover {

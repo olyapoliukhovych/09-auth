@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .label {
@@ -10,7 +10,7 @@
   font-size: 14px;
   font-weight: 500;
   color: #212529;
-  gap: 8px;
+  gap: 4px;
 }
 
 .label textarea {
@@ -25,7 +25,6 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
-  transition: all 250ms ease;
   background-color: #fff;
   font-family: inherit;
   color: #333;
@@ -47,7 +46,7 @@
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 12px;
 }
 
 .actions button:disabled {
@@ -56,14 +55,13 @@
 }
 
 .submitBtn {
-  padding: 8px 16px;
+  padding: 6px 12px;
   font-size: 16px;
   background-color: #550c72;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 250ms ease;
 }
 
 .submitBtn:hover,
@@ -78,14 +76,13 @@
 }
 
 .cancelBtn {
-  padding: 8px 16px;
+  padding: 6px 12px;
   font-size: 16px;
   background-color: #f8f9fa;
   color: #212529;
   border: 1px solid #ced4da;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 250ms ease;
 }
 
 .cancelBtn:hover,

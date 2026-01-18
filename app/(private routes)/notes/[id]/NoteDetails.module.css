@@ -48,9 +48,9 @@
   display: inline-block;
   padding: 4px 8px;
   font-size: 12px;
-  color: #0d6efd;
-  background-color: #e7f1ff;
-  border: 1px solid #b6d4fe;
+  color: #221d10;
+  background-color: rgb(251, 246, 240);
+  border: 1px solid rgb(253, 227, 201);
   border-radius: 12px;
   max-width: 100px;
   white-space: nowrap;

@@ -27,6 +27,7 @@ button,
 textarea,
 select {
   outline-color: #550c72;
+  transition: all 250ms ease;
 }
 
 .loadingMessage {

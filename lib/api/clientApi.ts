@@ -118,4 +118,9 @@ export const getMe = async () => {
   const { data } = await nextServer.get<User>("/users/me");
   return data;
 };
+
 // updateMe
+export const updateMe = async (data: { username: string }) => {
+  const res = await nextServer.patch("/users/me", data);
+  return res.data;
+};
