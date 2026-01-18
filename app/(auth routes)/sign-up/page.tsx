@@ -2,15 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import css from "./SignUpPage.module.css";
-import { useState } from "react";
-import { RegisterRequest } from "@/lib/api/clientApi";
+import { notify, RegisterRequest } from "@/lib/api/clientApi";
 import { register } from "@/lib/api/clientApi";
-import { ApiError } from "@/lib/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
 
 const SignUp = () => {
   const router = useRouter();
-  const [error, setError] = useState("");
   const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (formData: FormData) => {
@@ -20,17 +17,10 @@ const SignUp = () => {
 
       if (res) {
         setUser(res);
+        notify.registerSuccess();
         router.push("/profile");
-      } else {
-        setError("Invalid email or password");
       }
-    } catch (error) {
-      setError(
-        (error as ApiError).response?.data?.error ??
-          (error as ApiError).message ??
-          "Oops... some error",
-      );
-    }
+    } catch {}
   };
 
   return (
@@ -66,8 +56,6 @@ const SignUp = () => {
           </button>
         </div>
       </form>
-
-      {error && <p>{error}</p>}
     </main>
   );
 };

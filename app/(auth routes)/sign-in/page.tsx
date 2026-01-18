@@ -2,14 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import css from "./SignInPage.module.css";
-import { useState } from "react";
-import { login, LoginRequest } from "@/lib/api/clientApi";
-import { ApiError } from "@/lib/api/api";
+import { login, LoginRequest, notify } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 
 const SignIn = () => {
   const router = useRouter();
-  const [error, setError] = useState("");
   const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (formData: FormData) => {
@@ -19,17 +16,10 @@ const SignIn = () => {
 
       if (res) {
         setUser(res);
+        notify.loginSuccess();
         router.push("/profile");
-      } else {
-        setError("Invalid email or password");
       }
-    } catch (error) {
-      setError(
-        (error as ApiError).response?.data?.error ??
-          (error as ApiError).message ??
-          "Oops... some error",
-      );
-    }
+    } catch {}
   };
 
   return (
@@ -64,8 +54,6 @@ const SignIn = () => {
             Log in
           </button>
         </div>
-
-        {error && <p>{error}</p>}
       </form>
     </main>
   );

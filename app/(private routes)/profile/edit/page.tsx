@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useAuthStore } from "@/lib/store/authStore";
 import { updateMe } from "@/lib/api/clientApi";
 import css from "./EditProfilePage.module.css";
+import { Spinner } from "@/components/Spinner/Spinner";
 
 export default function EditProfilePage() {
   const router = useRouter();
@@ -39,6 +40,8 @@ export default function EditProfilePage() {
     router.push("/profile");
   };
 
+  if (!user) return <Spinner fullScreen />;
+
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -50,6 +53,7 @@ export default function EditProfilePage() {
           width={120}
           height={120}
           className={css.avatar}
+          priority
         />
 
         <form className={css.profileInfo} onSubmit={handleSubmit}>

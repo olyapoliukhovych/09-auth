@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
 import { Roboto } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -60,6 +61,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 5000,
+            style: {
+              color: "#333",
+              borderRadius: "10px",
+            },
+            success: {
+              duration: 5000,
+              iconTheme: {
+                primary: "#0a5431",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              duration: 5000,
+              iconTheme: {
+                primary: "#dc3545",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
         <TanStackProvider>
           <AuthProvider>
             <Header />

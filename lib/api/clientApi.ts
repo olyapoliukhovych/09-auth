@@ -1,6 +1,7 @@
 import { User } from "@/types/user";
 import { nextServer } from "./api";
 import { Tag } from "@/components/NoteForm/NoteForm";
+import toast from "react-hot-toast";
 
 export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 
@@ -123,4 +124,37 @@ export const getMe = async () => {
 export const updateMe = async (data: { username: string }) => {
   const res = await nextServer.patch("/users/me", data);
   return res.data;
+};
+
+// push notifications
+nextServer.interceptors.response.use(
+  (response) => {
+    if (
+      response.config.method === "patch" ||
+      response.config.method === "put"
+    ) {
+      toast.success("Changes saved successfully!");
+    }
+    return response;
+  },
+  (error) => {
+    const status = error.response?.status;
+    const message = error.response?.data?.message || "Something went wrong";
+
+    if (status === 401) return Promise.reject(error);
+
+    if (status === 400) toast.error(`Validation Error: ${message}`);
+    else if (status === 403) toast.error("Access denied!");
+    else if (status === 404) toast.error("Resource not found");
+    else if (status === 500) toast.error("Server error, try again later");
+    else toast.error(message);
+
+    return Promise.reject(error);
+  },
+);
+
+export const notify = {
+  loginSuccess: () => toast.success("Logged in successfully"),
+  logoutSuccess: () => toast.success("Logged out successfully"),
+  registerSuccess: () => toast.success("Account created! Please sign in."),
 };

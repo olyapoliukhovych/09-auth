@@ -4,6 +4,7 @@ import { fetchNoteById } from "@/lib/api/clientApi";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import css from "./NoteDetails.module.css";
+import { Spinner } from "@/components/Spinner/Spinner";
 
 export default function NoteDetailsClient() {
   const { id } = useParams();
@@ -18,7 +19,9 @@ export default function NoteDetailsClient() {
     refetchOnMount: false,
   });
 
-  if (isLoading) return <p>Loading, please wait...</p>;
+  if (isLoading) {
+    return <Spinner />;
+  }
   if (error || !note) return <p>Something went wrong.</p>;
 
   return (
