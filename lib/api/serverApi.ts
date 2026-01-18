@@ -1,5 +1,6 @@
+import { User } from "@/types/user";
 import { nextServer } from "./api";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 const getAuthHeaders = async () => {
   const headerStore = await headers();
@@ -24,18 +25,38 @@ export const fetchNoteByIdServer = async (id: string) => {
   return data;
 };
 
-export const getMeServer = async () => {
-  const authHeaders = await getAuthHeaders();
+// export const getMeServer = async () => {
+//   const authHeaders = await getAuthHeaders();
+//   const { data } = await nextServer.get("/users/me", {
+//     headers: authHeaders,
+//   });
+//   return data;
+// };
+
+export const getServerMe = async (): Promise<User> => {
+  const cookieStore = await cookies();
   const { data } = await nextServer.get("/users/me", {
-    headers: authHeaders,
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
   });
   return data;
 };
 
-export const checkSessionServer = async () => {
-  const authHeaders = await getAuthHeaders();
-  const { data } = await nextServer.get("/auth/session", {
-    headers: authHeaders,
+// export const checkSessionServer = async () => {
+//   const authHeaders = await getAuthHeaders();
+//   const { data } = await nextServer.get("/auth/session", {
+//     headers: authHeaders,
+//   });
+//   return data;
+// };
+
+export const checkServerSession = async () => {
+  const cookieStore = await cookies();
+  const res = await nextServer.get("/auth/session", {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
   });
-  return data;
+  return res;
 };

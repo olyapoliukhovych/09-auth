@@ -5,4 +5,5 @@ export type User = {
   photoUrl?: string;
   createdAt: Date;
   updatedAt: Date;
+  avatar: string;
 };
