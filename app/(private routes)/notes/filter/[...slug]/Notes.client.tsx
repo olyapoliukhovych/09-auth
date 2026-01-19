@@ -9,15 +9,17 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 import css from "../../NotesPage.module.css";
 import Link from "next/link";
+import { NoteTag } from "@/types/note";
 
-export default function NotesClient({ serverTag }: { serverTag?: string }) {
+export default function NotesClient({ serverTag }: { serverTag?: NoteTag }) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebounce(search, 500);
 
   const { data, isLoading } = useQuery({
     queryKey: ["notes", page, debouncedSearch, serverTag],
-    queryFn: () => fetchNotes(page, debouncedSearch, serverTag),
+    queryFn: () =>
+      fetchNotes({ page, search: debouncedSearch, tag: serverTag }),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });

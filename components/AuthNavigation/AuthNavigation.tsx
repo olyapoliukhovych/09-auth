@@ -6,12 +6,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { logout, notify } from "@/lib/api/clientApi";
 
-// const links = [
-//   { name: "Home", href: "/" },
-//   { name: "Notes", href: "/notes" },
-//   { name: "Profile", href: "/profile" },
-// ];
-
 export default function AuthNavigation() {
   const pathname = usePathname();
   const router = useRouter();

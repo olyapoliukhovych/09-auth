@@ -13,11 +13,9 @@ async function getAuthHeaders() {
 }
 
 interface FetchNotesParams {
+  page: number;
   search?: string;
   tag?: NoteTag;
-  page?: number;
-  perPage?: number;
-  sortBy?: "created" | "updated";
 }
 
 export const fetchNotesServer = async (params: FetchNotesParams) => {
@@ -25,9 +23,6 @@ export const fetchNotesServer = async (params: FetchNotesParams) => {
   const { data } = await nextServer.get("/notes", {
     ...authHeaders,
     params: {
-      page: params.page || 1,
-      perPage: params.perPage || 12,
-      sortBy: params.sortBy || "created",
       ...params,
     },
   });

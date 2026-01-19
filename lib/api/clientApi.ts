@@ -2,7 +2,7 @@ import { User } from "@/types/user";
 import { nextServer } from "./api";
 import { Tag } from "@/components/NoteForm/NoteForm";
 import toast from "react-hot-toast";
-import { Note } from "@/types/note";
+import { Note, NoteTag } from "@/types/note";
 
 export interface FetchNotesResponse {
   notes: Note[];
@@ -10,24 +10,19 @@ export interface FetchNotesResponse {
 }
 
 // notes
-export const fetchNotes = async (
-  page: number = 1,
-  search: string = "",
-  tag?: string,
-): Promise<FetchNotesResponse> => {
-  const params: Record<string, string | number> = {
-    page,
-    search,
-    perPage: 12,
-  };
+interface FetchNotesParams {
+  page: number;
+  search?: string;
+  tag?: NoteTag;
+}
 
-  if (tag && tag !== "all") {
-    params.tag = tag;
-  }
-
-  const { data } = await nextServer.get<FetchNotesResponse>("/notes", {
-    params,
+export const fetchNotes = async (params: FetchNotesParams) => {
+  const { data } = await nextServer.get("/notes", {
+    params: {
+      ...params,
+    },
   });
+
   return data;
 };
 
