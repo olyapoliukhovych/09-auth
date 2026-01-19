@@ -5,6 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import css from "./NotePreview.module.css";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/Modal/Modal";
+import { Spinner } from "@/components/Spinner/Spinner";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 function NotePreviewClient({ id }: { id: string }) {
   const router = useRouter();
@@ -20,15 +23,23 @@ function NotePreviewClient({ id }: { id: string }) {
     retry: false,
   });
 
-  if (!note) return null;
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to load note details");
+      const timer = setTimeout(() => router.back(), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isError, router]);
 
   return (
     <Modal onClose={() => router.back()} showBackButton={true}>
       {isLoading ? (
-        <p>Loading...</p>
+        <Spinner />
       ) : isError ? (
-        <p>Something went wrong.</p>
-      ) : (
+        <div className={css.statusMessage}>
+          <p>Something went wrong. Please try again later.</p>
+        </div>
+      ) : note ? (
         <div className={css.container}>
           <div className={css.item}>
             <div className={css.header}>
@@ -45,7 +56,7 @@ function NotePreviewClient({ id }: { id: string }) {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </Modal>
   );
 }

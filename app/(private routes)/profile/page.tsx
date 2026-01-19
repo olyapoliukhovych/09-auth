@@ -13,12 +13,6 @@ export const metadata: Metadata = {
 const ProfilePage = async () => {
   const user = await getServerMe();
 
-  //   const user = {
-  //     username: "your_username",
-  //     email: "your_email@example.com",
-  //     avatar: "https://ac.goit.global/default-avatar.png",
-  //   };
-
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -39,8 +33,8 @@ const ProfilePage = async () => {
           />
         </div>
         <div className={css.profileInfo}>
-          <p style={{ margin: "10px" }}>Username: Olya</p>
-          <p style={{ margin: "10px" }}>Email: olha.poliukhovych.1@gmail.com</p>
+          <p style={{ margin: "10px" }}>Username: {user.username}</p>
+          <p style={{ margin: "10px" }}>Email: {user.email}</p>
         </div>
       </div>
     </main>

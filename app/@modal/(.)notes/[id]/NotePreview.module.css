@@ -143,3 +143,9 @@
 .errorContainer button:hover {
   background-color: #e2e6ea;
 }
+
+.statusMessage {
+  padding: 20px;
+  text-align: center;
+  color: #2a003a;
+}

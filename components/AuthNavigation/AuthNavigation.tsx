@@ -15,7 +15,7 @@ import { logout, notify } from "@/lib/api/clientApi";
 export default function AuthNavigation() {
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated,
   );
@@ -69,7 +69,7 @@ export default function AuthNavigation() {
             </Link>
           </li>
           <li className={css.navigationItem}>
-            {/* <p className={css.userEmail}>User email: {user?.email}</p> */}
+            <p className={css.userEmail}>User email: {user?.email}</p>
             <button onClick={handleLogout} className={css.logoutButton}>
               Logout
             </button>

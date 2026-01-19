@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
@@ -62,13 +62,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <NextTopLoader
-          color="#fde3c9"
-          showSpinner={false}
-          // shadow="0 0 10px #fde3c9,0 0 5px #fde3c9"
-        />
+        <NextTopLoader color="#fde3c9" showSpinner={false} />
         <Toaster
-          position="top-right"
+          position="bottom-right"
           toastOptions={{
             duration: 3000,
             style: {

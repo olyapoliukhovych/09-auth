@@ -1,37 +1,44 @@
 import { User } from "@/types/user";
 import { nextServer } from "./api";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
+import { NoteTag } from "@/types/note";
 
-const getAuthHeaders = async () => {
-  const headerStore = await headers();
-  const cookie = headerStore.get("cookie");
-  return cookie ? { cookie } : {};
-};
+async function getAuthHeaders() {
+  const cookieStore = await cookies();
+  return {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  };
+}
 
-export const fetchNotesServer = async (params: object) => {
+interface FetchNotesParams {
+  search?: string;
+  tag?: NoteTag;
+  page?: number;
+  perPage?: number;
+  sortBy?: "created" | "updated";
+}
+
+export const fetchNotesServer = async (params: FetchNotesParams) => {
   const authHeaders = await getAuthHeaders();
   const { data } = await nextServer.get("/notes", {
-    params,
-    headers: authHeaders,
+    ...authHeaders,
+    params: {
+      page: params.page || 1,
+      perPage: params.perPage || 12,
+      sortBy: params.sortBy || "created",
+      ...params,
+    },
   });
   return data;
 };
 
 export const fetchNoteByIdServer = async (id: string) => {
   const authHeaders = await getAuthHeaders();
-  const { data } = await nextServer.get(`/notes/${id}`, {
-    headers: authHeaders,
-  });
+  const { data } = await nextServer.get(`/notes/${id}`, authHeaders);
   return data;
 };
-
-// export const getMeServer = async () => {
-//   const authHeaders = await getAuthHeaders();
-//   const { data } = await nextServer.get("/users/me", {
-//     headers: authHeaders,
-//   });
-//   return data;
-// };
 
 export const getServerMe = async (): Promise<User> => {
   const cookieStore = await cookies();
@@ -42,14 +49,6 @@ export const getServerMe = async (): Promise<User> => {
   });
   return data;
 };
-
-// export const checkSessionServer = async () => {
-//   const authHeaders = await getAuthHeaders();
-//   const { data } = await nextServer.get("/auth/session", {
-//     headers: authHeaders,
-//   });
-//   return data;
-// };
 
 export const checkServerSession = async () => {
   const cookieStore = await cookies();
