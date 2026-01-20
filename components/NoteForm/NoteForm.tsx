@@ -26,6 +26,7 @@ export default function NoteForm({ tags }: NoteFormProps) {
     mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
+      toast.success("Note created successfully!");
       clearDraft();
       router.push("/notes/filter/all");
     },
