@@ -6,6 +6,7 @@ import { createNote } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { NewNoteData } from "@/types/note";
+import toast from "react-hot-toast";
 
 export interface Tag {
   id: string;
