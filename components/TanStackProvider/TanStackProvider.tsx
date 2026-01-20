@@ -21,7 +21,8 @@ export default function TanStackProvider({
     }),
     mutationCache: new MutationCache({
       onError: (error) => {
-        const message = error.response?.data?.message || error.message || "Something went wrong";
+        const err = error as AxiosError<{ message?: string }>;
+        const message = err.response?.data?.message || err.message || "Something went wrong";
         toast.error(message);
       },
     }),
