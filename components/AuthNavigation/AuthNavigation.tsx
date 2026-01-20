@@ -4,7 +4,8 @@ import { useAuthStore } from "@/lib/store/authStore";
 import css from "./AuthNavigation.module.css";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { logout, notify } from "@/lib/api/clientApi";
+import { logout } from "@/lib/api/clientApi";
+import toast from "react-hot-toast";
 
 export default function AuthNavigation() {
   const pathname = usePathname();
@@ -22,10 +23,11 @@ export default function AuthNavigation() {
   const handleLogout = async () => {
     try {
       await logout();
-      notify.logoutSuccess();
+      toast.success("Logged out successfully");
       clearIsAuthenticated();
       router.push("/sign-in");
     } catch {
+      toast.error("Failed to log out");
       clearIsAuthenticated();
       router.push("/sign-in");
     }
