@@ -2,9 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import css from "./SignUpPage.module.css";
-import { notify, RegisterRequest } from "@/lib/api/clientApi";
+import { RegisterRequest } from "@/lib/api/clientApi";
 import { register } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const router = useRouter();
@@ -17,10 +18,12 @@ const SignUp = () => {
 
       if (res) {
         setUser(res);
-        notify.registerSuccess();
+        toast.success("Account created!");
         router.push("/profile");
       }
-    } catch {}
+    } catch {
+      toast.error("Failed to sign up");
+    }
   };
 
   return (
