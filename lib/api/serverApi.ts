@@ -1,7 +1,7 @@
 import { User } from "@/types/user";
 import { nextServer } from "./api";
 import { cookies } from "next/headers";
-import { NoteTag } from "@/types/note";
+import { Note, NoteTag } from "@/types/note";
 
 async function getAuthHeaders() {
   const cookieStore = await cookies();
@@ -18,7 +18,12 @@ interface FetchNotesParams {
   tag?: NoteTag;
 }
 
-export const fetchNotesServer = async (params: FetchNotesParams) => {
+interface FetchNotesResponse {
+  notes: Note[];
+  totalPages: number;
+}
+
+export const fetchNotesServer = async (params: FetchNotesParams):Promise<FetchNotesResponse> => {
   const authHeaders = await getAuthHeaders();
   const { data } = await nextServer.get("/notes", {
     ...authHeaders,
@@ -29,7 +34,7 @@ export const fetchNotesServer = async (params: FetchNotesParams) => {
   return data;
 };
 
-export const fetchNoteByIdServer = async (id: string) => {
+export const fetchNoteByIdServer = async (id: string):Promise<Note>  => {
   const authHeaders = await getAuthHeaders();
   const { data } = await nextServer.get(`/notes/${id}`, authHeaders);
   return data;
