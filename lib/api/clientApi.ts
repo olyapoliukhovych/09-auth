@@ -1,7 +1,7 @@
 import { User } from "@/types/user";
 import { nextServer } from "./api";
 import { Tag } from "@/components/NoteForm/NoteForm";
-import { Note, NoteTag } from "@/types/note";
+import { Note, NoteTag, NewNoteData } from "@/types/note";
 
 export interface FetchNotesResponse {
   notes: Note[];
@@ -30,7 +30,7 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
   return data;
 };
 
-export const createNote = async (noteContent: object): Promise<Note> => {
+export const createNote = async (noteContent: NewNoteData): Promise<Note> => {
   const { data } = await nextServer.post<Note>("/notes", noteContent);
   return data;
 };
